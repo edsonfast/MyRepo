@@ -44,7 +44,7 @@ app.post("/repositories", (request, response) => {
   // TODO
   const { title, url, techs } = request.body;
 
-  const repo = {id: uuid(), title, url, techs, like: 0 }
+  const repo = {id: uuid(), title, url, techs, likes: 0 };
 
   repositories.push(repo);
 
@@ -68,7 +68,7 @@ app.put("/repositories/:id", (request, response) => {
     title,
     url,
     techs,
-    like: repositories[repoIndex].like
+    likes: repositories[repoIndex].likes
   }
 
   repositories[repoIndex] = repo;
@@ -103,9 +103,9 @@ app.post("/repositories/:id/like", (request, response) => {
 
   const repo = repositories[repoIndex];
   
-  repo.like = repo.like + 1;
+  repo.likes = repo.likes + 1;
 
-  return response.json(repositories[repoIndex]);
+  return response.json({ likes: repo.likes });
 
 });
 
